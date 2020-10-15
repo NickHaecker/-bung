@@ -32,16 +32,35 @@ title('greyed Image')
 %montage({assignment_image,newImage})
 
 
-start_width = ( assignment_image(1,:,:) / 100 ) * 80;
-start_height = ( assignment_image(:,2 ,:)/ 100 ) * 20;
-end_width = ( assignment_image(1,:,:) / 100 ) * 80 + 10;
-end_height = ( assignment_image(:,2 ,:)/ 100 ) * 20 + 10;
+
+start_width = assignment_image(1,:,:) / 100 * 80;
+end_width = assignment_image(1,:,:) / 100 * 80 + 10;
+
+start_height = assignment_image(:,1,:) / 100 * 20;
+end_height = assignment_image(:,^1,:) / 100 * 20 + 10;
+
+%start_width =  assignment_image(: / 100) * 80,:,:);
+%start_height = ( assignment_image(:,1 ,:)/ 100 ) * 20;
+%end_width = ( assignment_image(1,:,:) / 100 ) * 80 + 10;
+%end_height = ( assignment_image(:,1 ,:)/ 100 ) * 20 + 10;
 
 width = end_width - start_width;
-r_width = r_width(:,:,1)*0.3
+r_width = width(:,:,1)*0.3;
+g_width = width(:,:,2)*0.1;
+b_width = width(:,:,3)*0.6;
+width_img = r_width+g_width+b_width;
+new_width = width_img / max(width_img(:));
 
+height= end_height - start_height;
+r_height = height(:,:,1)*0.3;
+g_height = height(:,:,2)*0.1;
+b_height = height(:,:,3)*0.6;
+height_img = r_height+ g_height+ b_height;
+new_height = height_img / max(height_img(:));
 
-
-
-
+square_image= assignment_image + new_width + new_height;
+square_image = square_image / 3;
+subplot(3,3,7);
+imshow(square_image);
+title('blubb Image')
 whos 
