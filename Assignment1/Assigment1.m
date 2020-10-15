@@ -18,7 +18,24 @@ newImage = cat(3, redChannel, greenChannel, blueChannel);
 subplot(3,3,5);
 imshow(newImage)
 title('multiplicated britghness')
+%montage({assignment_im,newImage})
+
+
+redChannel_1 = assignment_image(:,:,1)*0.3;
+greenChannel_1 = assignment_image(:,:,2) *0.6;
+blueChannel_1 = assignment_image(:,:,3)*0.1;
+newImage_1 = 0.2126 * redChannel_1 + 0.7152 * greenChannel_1 + 0.0722 * blueChannel_1;
+newImage_1 = newImage_1 / max(newImage_1(:));
+subplot(3,3,6);
+imshow(newImage_1);
+title('greyed Image')
 %montage({assignment_image,newImage})
+
+
+
+
+
+
 
 
 whos 
