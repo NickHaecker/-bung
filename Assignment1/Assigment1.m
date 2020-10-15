@@ -32,7 +32,13 @@ title('greyed Image')
 %montage({assignment_image,newImage})
 
 
+start_width = ( assignment_image(1,:,:) / 100 ) * 80;
+start_height = ( assignment_image(:,2 ,:)/ 100 ) * 20;
+end_width = ( assignment_image(1,:,:) / 100 ) * 80 + 10;
+end_height = ( assignment_image(:,2 ,:)/ 100 ) * 20 + 10;
 
+width = end_width - start_width;
+r_width = r_width(:,:,1)*0.3
 
 
 
