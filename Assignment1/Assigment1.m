@@ -84,10 +84,12 @@ Vimg_blue = assignment_image(:,:,3) * (-0.10001);
 Vimg = Vimg_red + Vimg_green + Vimg_blue;
 %imshow(Vimg);
 
-YUV_img = cat(3, Yimg, Uimg, Vimg);
-imshow(YUV_img);
+%YUV_img = cat(3, Yimg, Uimg, Vimg);
 
-
+%subplot(3,3,9);
+%imshow(YUV_img);
+%title('YUV_img')
+montage({assignment_image,YUV_img})
 YUV2RGB = [ 1, 0, 1.13983;
             1, -0.39465, -0.58060;
             1, 2.03211, 0           ];
