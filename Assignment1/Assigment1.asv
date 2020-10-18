@@ -1,21 +1,21 @@
 bsp_image = imread('Eclectus_roratus-20030511.jpg');
 assignment_image = im2double(bsp_image);
-subplot(3,3,2);
-imshow(assignment_image);
-title('Original Image')
+%subplot(3,3,2);
+%imshow(assignment_image);
+%title('Original Image')
 
 assignment_image_2_added_brightness = assignment_image+ 0.2;
 %montage({assignment_image,assignment_image_2_added_brightness})
-subplot(3,3,4);
-imshow(assignment_image_2_added_brightness)
-title('added britghness')
+%subplot(3,3,4);
+%imshow(assignment_image_2_added_brightness)
+%title('added britghness')
 
 
 redChannel = assignment_image(:,:,1)*0.8;
 greenChannel = assignment_image(:,:,2) *0.2;
 blueChannel = assignment_image(:,:,3)*0.1;
 newImage = cat(3, redChannel, greenChannel, blueChannel);
-subplot(3,3,5);
+%subplot(3,3,5);
 %imshow(newImage)
 %title('multiplicated britghness')
 %montage({assignment_im,newImage})
@@ -40,15 +40,44 @@ square_image = insertShape(assignment_image, 'FilledRectangle', [width_, height_
 %imshow(square_image);
 %title('Sliced Image')
 
-
 Image_with_horizontical_line = assignment_image;
-Image_with_horizontical_line(1:553, 195, 1)=1;
-Image_with_horizontical_line(1:553,195,2)=1;
-Image_with_horizontical_line(1:553,195,3)=1;
-
+Image_with_horizontical_line(415, 1:975, 1) = 1;
+Image_with_horizontical_line(415, 1:975, 2) = 1;
+Image_with_horizontical_line(415, 1:975, 3) = 1;
 %subplot(3,3,8);
-imshow(Image_with_horizontical_line);
+%imshow(Image_with_horizontical_line);
+%title('Horizonticle line')
+
+
+Image_with_verticle_line = assignment_image;
+Image_with_verticle_line(1:553, 244, 1)=1;
+Image_with_verticle_line(1:553,244,2)=1;
+Image_with_verticle_line(1:553,244,3)=1;
+
+%subplot(3,3,9);
+%imshow(Image_with_verticle_line);
 %title('Vertical line')
+
+
+RGB2YUV = [ 0.299,0.587,0.114;
+            -0.14713,-0.28886,0.436;
+            0.615,-0.51499,-0.10001 ];
+        
+        
+%col_one = RGB2YUV(:,1,:);
+%col_two = RGB2YUV(:, 2, :);
+%col_three = RGB2YUV(:,3,:);
+%redChannel_2 = assignment_image(:,:,1)* col_one;
+%greenChannel_2 = assignment_image(:,:,2)* col_two ;
+%blueChannel_2 = assignment_image(:,:,3) * col_three;
+%testImage = cat(3, redChannel_2, greenChannel_2, blueChannel_2);
+%imshow(testImage);
+
+Yimg_red = assignment_image(:,:,1)*0.299;
+Yimg_green 
+
+
+
 
 
 whos 

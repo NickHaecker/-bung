@@ -59,4 +59,42 @@ Image_with_verticle_line(1:553,244,3)=1;
 %title('Vertical line')
 
 
+RGB2YUV = [ 0.299,0.587,0.114;
+            -0.14713,-0.28886,0.436;
+            0.615,-0.51499,-0.10001 ];
+        
+Yimg_red = assignment_image(:,:,1)*0.299;
+Yimg_green = assignment_image(:,:,2)* 0.587;
+Yimg_blue = assignment_image(:,:,3)*0.114;
+
+Yimg = Yimg_red + Yimg_green + Yimg_blue;
+%imshow(Yimg);
+
+Uimg_red = assignment_image(:,:,1)* (-0.14713);
+Uimg_green = assignment_image(:,:,2)* (-0.28886);
+Uimg_blue = assignment_image(:,:,3) * 0.436;
+
+Uimg = Uimg_red + Uimg_green + Uimg_blue;
+%imshow(Uimg);
+
+Vimg_red = assignment_image(:,:,1)* 0.615;
+Vimg_green = assignment_image(:,:,2)* (-0.51499);
+Vimg_blue = assignment_image(:,:,3) * (-0.10001);
+
+Vimg = Vimg_red + Vimg_green + Vimg_blue;
+%imshow(Vimg);
+
+YUV_img = cat(3, Yimg, Uimg, Vimg);
+imshow(YUV_img);
+
+
+YUV2RGB = [ 1, 0, 1.13983;
+            1, -0.39465, -0.58060;
+            1, 2.03211, 0           ];
+
+
+
+
+
+
 whos 
