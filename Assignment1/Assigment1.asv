@@ -59,9 +59,9 @@ Image_with_verticle_line(1:553,244,3)=1;
 %title('Vertical line')
 
 
-RGB2YUV = [ 0.299,0.587,0.114;
-            -0.14713,-0.28886,0.436;
-            0.615,-0.51499,-0.10001 ];
+%RGB2YUV = [ 0.299,0.587,0.114;
+%            -0.14713,-0.28886,0.436;
+%            0.615,-0.51499,-0.10001 ];
         
 Yimg_red = assignment_image(:,:,1)*0.299;
 Yimg_green = assignment_image(:,:,2)* 0.587;
@@ -89,10 +89,10 @@ YUV_img = cat(3, Yimg, Uimg, Vimg);
 %subplot(3,3,9);
 %imshow(YUV_img);
 %title('YUV_img')
-%montage({assignment_image,YUV_img})
-YUV2RGB = [ 1, 0, 1.13983;
-            1, -0.39465, -0.58060;
-            1, 2.03211, 0           ];
+
+%YUV2RGB = [ 1, 0, 1.13983;
+%            1, -0.39465, -0.58060;
+%            1, 2.03211, 0           ];
 
 Rimg_y = YUV_img(:,:,1) * 1;
 Gimg_y = YUV_img(:,:,2) * 0;
@@ -102,23 +102,54 @@ Bimg_y = YUV_img(:,:,3) * 1.13983;
 Img_y = Rimg_y + Gimg_y + Bimg_y;
 %imshow(Img_y);
 
-
 Rimg_u = YUV_img(:,:,1) * 1;
 Gimg_u = YUV_img(:,:,2) * (-0.39465);
 Bimg_u = YUV_img(:,:,3) * (-0.58060);
 
-
 Img_u = Rimg_u + Gimg_u + Bimg_u;
 %imshow(Img_u);
 
-
 Rimg_v = YUV_img(:,:,1) * 1;
-Gimg_v = YUV_img(:,:,2) * (-0.39465);
-Bimg_v = YUV_img(:,:,3) * (-0.58060);
-
+Gimg_v = YUV_img(:,:,2) * 2.03211;
+Bimg_v = YUV_img(:,:,3) * 0;
 
 Img_v = Rimg_v + Gimg_v + Bimg_v;
 %imshow(Img_v);
+
+RGB_img=cat(3, Img_y, Img_u, Img_v);
+%subplot(3,3,10);
+%imshow(RGB_img);
+%title('YUV2RGB image')
+
+filter = fspecial('gaussian',[9,9],10);
+Y_filtered = imfilter(Yimg,filter,'same');
+
+Blured_img_Y = cat(3, Y_filtered, Img_u, Img_v);
+
+blurred_Rimg_y = Blured_img_Y(:,:,1) * 1;
+blurred_Gimg_y = Blured_img_Y(:,:,2) * 0;
+blurred_Bimg_y = Blured_img_Y(:,:,3) * 1.13983;
+
+
+blurred_Img_y = blurred_Rimg_y + blurred_Gimg_y + blurred_Bimg_y;
+%imshow(blurred_Img_y);
+
+blurred_Rimg_u = Blured_img_Y(:,:,1) * 1;
+blurred_Gimg_u = Blured_img_Y(:,:,2) * (-0.39465);
+blurred_Bimg_u = Blured_img_Y(:,:,3) * (-0.58060);
+
+Img_u = blurred_Rimg_u + blurred_Gimg_u + blurred_Bimg_u;
+%imshow(Img_u);
+
+blurred_Rimg_v = Blured_img_Y(:,:,1) * 1;
+blurGimg_v = Blured_img_Y(:,:,2) * 2.03211;
+Bimg_v = Blured_img_Y(:,:,3) * 0;
+
+Img_v = Rimg_v + Gimg_v + Bimg_v;
+%imshow(Img_v);
+
+RGB_img=cat(3, Img_y, Img_u, Img_v);
+
 
 
 
