@@ -146,10 +146,10 @@ blurred_Gimg_v = Blured_img_Y(:,:,2) * 2.03211;
 blurred_Bimg_v = Blured_img_Y(:,:,3) * 0;
 
 blurred_Img_v = blurred_Rimg_v + blurred_Gimg_v + blurred_Bimg_v;
-%imshow(blurred_Img_v);
+imshow(blurred_Img_v);
 
 blurred_RGB_img=cat(3, blurred_Img_y, blurred_Img_u, blurred_Img_v);
-imshow(blurred_RGB_img);
+%imshow(blurred_RGB_img);
 
 
 
