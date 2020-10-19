@@ -84,15 +84,47 @@ Vimg_blue = assignment_image(:,:,3) * (-0.10001);
 Vimg = Vimg_red + Vimg_green + Vimg_blue;
 %imshow(Vimg);
 
-%YUV_img = cat(3, Yimg, Uimg, Vimg);
+YUV_img = cat(3, Yimg, Uimg, Vimg);
 
 %subplot(3,3,9);
 %imshow(YUV_img);
 %title('YUV_img')
-montage({assignment_image,YUV_img})
+
 YUV2RGB = [ 1, 0, 1.13983;
             1, -0.39465, -0.58060;
             1, 2.03211, 0           ];
+
+Rimg_y = YUV_img(:,:,1) * 1;
+Gimg_y = YUV_img(:,:,2) * 0;
+Bimg_y = YUV_img(:,:,3) * 1.13983;
+
+
+Img_y = Rimg_y + Gimg_y + Bimg_y;
+%imshow(Img_y);
+
+
+Rimg_u = YUV_img(:,:,1) * 1;
+Gimg_u = YUV_img(:,:,2) * (-0.39465);
+Bimg_u = YUV_img(:,:,3) * (-0.58060);
+
+
+Img_u = Rimg_u + Gimg_u + Bimg_u;
+%imshow(Img_u);
+
+
+Rimg_v = YUV_img(:,:,1) * 1;
+Gimg_v = YUV_img(:,:,2) * 2.03211;
+Bimg_v = YUV_img(:,:,3) * 0;
+
+
+Img_v = Rimg_v + Gimg_v + Bimg_v;
+%imshow(Img_v);
+
+RGB_img=cat(3, Img_y, Img_u, Img_v);
+%subplot(3,3,10);
+%imshow(RGB_img);
+%title('YUV2RGB image')
+
 
 
 
