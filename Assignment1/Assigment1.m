@@ -121,11 +121,11 @@ RGB_img=cat(3, Img_y, Img_u, Img_v);
 %imshow(RGB_img);
 %title('YUV2RGB image')
 
-filter = fspecial('gaussian',[9,9],10);
-Y_filtered = imfilter(Yimg,filter,'same');
+filter = fspecial('gaussian',[9 9],10);
+Y_filtered = imfilter(Img_y,filter,'same');
 
 Blured_img_Y = cat(3, Y_filtered, Img_u, Img_v);
-
+%imshow(Blured_img_Y);
 blurred_Rimg_y = Blured_img_Y(:,:,1) * 1;
 blurred_Gimg_y = Blured_img_Y(:,:,2) * 0;
 blurred_Bimg_y = Blured_img_Y(:,:,3) * 1.13983;
