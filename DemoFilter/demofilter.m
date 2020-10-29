@@ -1,0 +1,10 @@
+im = im2double(imread('Eclectus_roratus-20030511.jpg')); 
+g = fspecial('gaussian',15,2); 
+imagesc(g);
+surfl(g);
+gim = conv2(im,g,'same'); 
+imagesc(conv2(im,[-1 1],'same')); 
+imagesc(conv2(gim,[-1 1],'same')); 
+dx = conv2(g,[-1 1],'same');
+surfl(dx);
+imagesc(conv2(im,dx,'same'));
