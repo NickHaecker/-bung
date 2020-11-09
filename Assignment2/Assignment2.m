@@ -1,7 +1,9 @@
-%Code von Sebastian Pfeiffer und Raphael Hild und Nick Häcker
-%26.10.2020
+%Code von Sebastian Pfeiffer, Nick Häcker und Raphael Hild
+%09.11.2020
 
 clear
+
+%----------------------------------------%
 
 %Demosaicing und Interpolation
 
@@ -17,7 +19,6 @@ y(1:2:height(I), 1:2:width(I), 1) = I(1:2:height(I), 1:2:width(I),1);
 %green
 y(1:2:height(I), 2:2:width(I), 2) = I(1:2:height(I), 2:2:width(I),1);
 y(2:2:height(I), 1:2:width(I), 2) = I(2:2:height(I), 1:2:width(I),1);
-%y(1:2:height(I), 2:2:width(I), 2) = y(1:2:height(I), 2:2:width(I), 2) + y(2:2:height(I), 1:2:width(I), 2);
 
 %blue
 y(2:2:height(I), 2:2:width(I), 3) = I(2:2:height(I), 2:2:width(I),1);
@@ -32,7 +33,10 @@ y(:,:,2) = y(:,:,2) + Green;
 y(:,:,3) = y(:,:,3) + Blue;
 
 DemosaicedPicture = cat(3, y(1:2:height(I), 1:2:width(I), 1), y(1:2:height(I), 2:2:width(I), 2), y(2:2:height(I), 2:2:width(I), 3));
-imshow(DemosaicedPicture)
+imshow(DemosaicedPicture);
+
+
+%----------------------------------------%
 
 %White Balancing
 
@@ -55,6 +59,38 @@ INewblue= DemosaicedPicture(:,:,3)*(1/pges(3));
 
 INew = cat(3,INewred,INewgreen,INewblue);
 
-imshow(INew)
+imshow(INew);
 
 
+%----------------------------------------%
+
+%Gamma Correction
+
+Igrey = rgb2gray(INew);
+
+imshow(Igrey);
+
+Igrey = Igrey.^1/2.2;
+
+ratio1 = INew(:,:,1)./ Igrey(:,:,1);
+ratio2 = INew(:,:,2)./ Igrey(:,:,1);
+ratio3 = INew(:,:,3)./ Igrey(:,:,1);
+
+
+ratio1 = ratio1.*Igrey(:,:,1);
+ratio2 = ratio2.*Igrey(:,:,1);
+ratio3 = ratio3.*Igrey(:,:,1);
+
+Igrey2 = cat(3,ratio1,ratio2,ratio3);
+
+montage({INew, Igrey2});
+
+
+%----------------------------------------%
+
+%Histogram Equalization
+
+histogram(Igrey)
+I2nd = imread('uneqImg.jpg');
+
+histogram(I2nd)
