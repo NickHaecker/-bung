@@ -90,7 +90,7 @@ montage({INew, Igrey2});
 
 %Histogram Equalization
 
-histogram(Igrey)
+%histogram(Igrey)
 I2nd = imread('uneqImg.jpg');
 
-histogram(I2nd)
+%%histogram(I2nd)
